@@ -2,5 +2,6 @@
 {
     public class Produit
     {
+        int prix;
     }
 }
