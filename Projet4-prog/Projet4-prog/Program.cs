@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Projet4_prog.Data;
 
 namespace Projet4_prog
 {
@@ -6,8 +9,14 @@ namespace Projet4_prog
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<Projet4_progContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Projet4_progContext") ?? throw new InvalidOperationException("Connection string 'Projet4_progContext' not found.")));
 
             // Add services to the container.
+            builder.Services.AddDbContext<Projet4_progContext>(options =>
+
+options.UseSqlServer(builder.Configuration.GetConnectionString("Projet4_progContext")
+?? throw new InvalidOperationException("Connection string 'BuffetAPIContext' not found.")));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
