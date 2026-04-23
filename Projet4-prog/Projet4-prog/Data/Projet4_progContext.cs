@@ -1,18 +1,22 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Projet4_prog.Data;
+using Projet4_prog.Data.SeedConfigurations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Projet4_prog.Data
 {
-    public class Projet4_progContext : DbContext
+    
+}
+public class Projet4_progContext(DbContextOptions<Projet4_progContext> options) :
+DbContext(options)
+{
+    public DbSet<Produit> Produits { get; set; } = default!;
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public Projet4_progContext (DbContextOptions<Projet4_progContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<Projet4_prog.Data.Produit> Produit { get; set; } = default!;
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new ProduitConfiguration());
     }
 }

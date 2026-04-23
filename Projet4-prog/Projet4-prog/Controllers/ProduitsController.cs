@@ -24,14 +24,14 @@ namespace Projet4_prog.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Produit>>> GetProduit()
         {
-            return await _context.Produit.ToListAsync();
+            return await _context.Produits.ToListAsync();
         }
 
         // GET: api/Produits/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Produit>> GetProduit(int id)
         {
-            var produit = await _context.Produit.FindAsync(id);
+            var produit = await _context.Produits.FindAsync(id);
 
             if (produit == null)
             {
@@ -77,7 +77,7 @@ namespace Projet4_prog.Controllers
         [HttpPost]
         public async Task<ActionResult<Produit>> PostProduit(Produit produit)
         {
-            _context.Produit.Add(produit);
+            _context.Produits.Add(produit);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProduit", new { id = produit.Id }, produit);
@@ -87,13 +87,13 @@ namespace Projet4_prog.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduit(int id)
         {
-            var produit = await _context.Produit.FindAsync(id);
+            var produit = await _context.Produits.FindAsync(id);
             if (produit == null)
             {
                 return NotFound();
             }
 
-            _context.Produit.Remove(produit);
+            _context.Produits.Remove(produit);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace Projet4_prog.Controllers
 
         private bool ProduitExists(int id)
         {
-            return _context.Produit.Any(e => e.Id == id);
+            return _context.Produits.Any(e => e.Id == id);
         }
     }
 }
