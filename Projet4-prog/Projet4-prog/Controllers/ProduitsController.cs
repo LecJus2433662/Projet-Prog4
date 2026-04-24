@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projet4_prog.Data;
+using Projet4_prog.Models;
 
 namespace Projet4_prog.Controllers
 {

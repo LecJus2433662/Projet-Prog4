@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projet4_prog.Data;
 
@@ -11,9 +12,11 @@ using Projet4_prog.Data;
 namespace Projet4_prog.Migrations
 {
     [DbContext(typeof(Projet4_progContext))]
-    partial class Projet4_progContextModelSnapshot : ModelSnapshot
+    [Migration("20260424192714_AjoutIdentityEtCommandes")]
+    partial class AjoutIdentityEtCommandes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

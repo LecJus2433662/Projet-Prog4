@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Projet4_prog.Models;
 
 namespace Projet4_prog.Data.SeedConfigurations
 {

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Projet4_prog.Data;
 
+
 namespace Projet4_prog
 {
     public class Program
@@ -16,7 +17,8 @@ namespace Projet4_prog
             builder.Services.AddDbContext<Projet4_progContext>(options =>
 
 options.UseSqlServer(builder.Configuration.GetConnectionString("Projet4_progContext")
-?? throw new InvalidOperationException("Connection string 'BuffetAPIContext' not found.")));
+?? throw new InvalidOperationException("Connection string 'Projet4_progContext' not found.")));
+            builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfile>());
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
