@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Projet4_prog.Data;
-using Projet4_prog.Models;
+using Projet4_prog.DTO.Produit;
+using Projet4_prog.Services;
 
 namespace Projet4_prog.Controllers
 {
@@ -14,95 +9,65 @@ namespace Projet4_prog.Controllers
     [ApiController]
     public class ProduitsController : ControllerBase
     {
-        private readonly Projet4_progContext _context;
+        private readonly IProduitService _produitService;
+        private readonly ILogger<ProduitsController> _logger;
 
-        public ProduitsController(Projet4_progContext context)
+        public ProduitsController(IProduitService produitService, ILogger<ProduitsController> logger)
         {
-            _context = context;
+            _produitService = produitService;
+            _logger = logger;
         }
 
-        // GET: api/Produits
+        // GET api/produits — public
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Produit>>> GetProduit()
+        public async Task<IActionResult> ObtenirTous()
         {
-            return await _context.Produits.ToListAsync();
+            var produits = await _produitService.ObtenirTousAsync();
+            return Ok(produits);
         }
 
-        // GET: api/Produits/5
+        // GET api/produits/5 — public
         [HttpGet("{id}")]
-        public async Task<ActionResult<Produit>> GetProduit(int id)
+        public async Task<IActionResult> ObtenirParId(int id)
         {
-            var produit = await _context.Produits.FindAsync(id);
-
+            var produit = await _produitService.ObtenirParIdAsync(id);
             if (produit == null)
-            {
-                return NotFound();
-            }
+                return NotFound($"Produit {id} introuvable.");
 
-            return produit;
+            return Ok(produit);
         }
 
-        // PUT: api/Produits/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduit(int id, Produit produit)
-        {
-            if (id != produit.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(produit).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProduitExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Produits
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST api/produits — admin seulement
         [HttpPost]
-        public async Task<ActionResult<Produit>> PostProduit(Produit produit)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Creer(ProduitEcritureDto dto)
         {
-            _context.Produits.Add(produit);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduit", new { id = produit.Id }, produit);
+            var produit = await _produitService.CreerAsync(dto);
+            return CreatedAtAction(nameof(ObtenirParId), new { id = produit.Id }, produit);
         }
 
-        // DELETE: api/Produits/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduit(int id)
+        // PUT api/produits/5 — admin seulement
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Modifier(int id, ProduitEcritureDto dto)
         {
-            var produit = await _context.Produits.FindAsync(id);
+            var produit = await _produitService.ModifierAsync(id, dto);
             if (produit == null)
-            {
-                return NotFound();
-            }
+                return NotFound($"Produit {id} introuvable.");
 
-            _context.Produits.Remove(produit);
-            await _context.SaveChangesAsync();
+            return Ok(produit);
+        }
+
+        // DELETE api/produits/5 — admin seulement
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Supprimer(int id)
+        {
+            var succes = await _produitService.SupprimerAsync(id);
+            if (!succes)
+                return NotFound($"Produit {id} introuvable.");
 
             return NoContent();
-        }
-
-        private bool ProduitExists(int id)
-        {
-            return _context.Produits.Any(e => e.Id == id);
         }
     }
 }

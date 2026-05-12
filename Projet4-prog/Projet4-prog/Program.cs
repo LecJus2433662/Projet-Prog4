@@ -102,6 +102,21 @@ namespace Projet4_prog
             var app = builder.Build();
 
             // Seed des rôles et de l'admin
+            app.UseStatusCodePages(async context =>
+            {
+                var response = context.HttpContext.Response;
+
+                if (response.StatusCode == 401)
+                {
+                    response.ContentType = "application/json";
+                    await response.WriteAsync("{\"message\": \"Vous devez être connecté pour accéder à cette ressource.\"}");
+                }
+                else if (response.StatusCode == 403)
+                {
+                    response.ContentType = "application/json";
+                    await response.WriteAsync("{\"message\": \"Accès refusé. Vous n'avez pas les droits administrateur pour effectuer cette action.\"}");
+                }
+            });
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
