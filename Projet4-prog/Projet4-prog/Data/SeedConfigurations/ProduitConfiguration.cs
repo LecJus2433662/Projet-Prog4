@@ -22,7 +22,7 @@ namespace Projet4_prog.Data.SeedConfigurations
                     Nom = "Pudding chomeur",
                     Description = "c'est tellement bon pour mathis",
                     Prix = 16.67,
-                    NbProduitRestant = 1,
+                    NbProduitRestant = 67,
                     image = "https://www.allrecipes.com/recipe/267358/pouding-chomeur/"
                 },
                 new Produit {
@@ -30,7 +30,7 @@ namespace Projet4_prog.Data.SeedConfigurations
                     Nom = "Tire d'érable",
                     Description = "Le sirop d'érable chauffé est versé dans la neige pour créer la tire. · Versez le sirop d'érable dans une neige compactée",
                     Prix = 1.67,
-                    NbProduitRestant = 80,
+                    NbProduitRestant = 67,
                     image = "https://www.noovomoi.ca/cuisiner/trucs-et-inspirations/article.etapes-tire-erable-maison.1.618708.html"
                 },
                  new Produit
@@ -39,7 +39,7 @@ namespace Projet4_prog.Data.SeedConfigurations
                      Nom = "3 Crèpes",
                      Description = "Des pitas mais sucrée",
                      Prix = 8.67,
-                     NbProduitRestant = 8,
+                     NbProduitRestant = 67,
                      image = "https://www.noovomoi.ca/cuisiner/trucs-et-inspirations/article.etapes-tire-erable-maison.1.618708.html"
                  }
 
