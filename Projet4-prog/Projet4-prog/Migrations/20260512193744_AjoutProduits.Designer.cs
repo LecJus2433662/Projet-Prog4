@@ -12,8 +12,8 @@ using Projet4_prog.Data;
 namespace Projet4_prog.Migrations
 {
     [DbContext(typeof(Projet4_progContext))]
-    [Migration("20260424192714_AjoutIdentityEtCommandes")]
-    partial class AjoutIdentityEtCommandes
+    [Migration("20260512193744_AjoutProduits")]
+    partial class AjoutProduits
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,7 +258,7 @@ namespace Projet4_prog.Migrations
                         {
                             Id = 2,
                             Description = "c'est tellement bon pour mathis",
-                            NbProduitRestant = 1,
+                            NbProduitRestant = 67,
                             Nom = "Pudding chomeur",
                             Prix = 16.670000000000002,
                             image = "https://www.allrecipes.com/recipe/267358/pouding-chomeur/"
@@ -267,7 +267,7 @@ namespace Projet4_prog.Migrations
                         {
                             Id = 3,
                             Description = "Le sirop d'érable chauffé est versé dans la neige pour créer la tire. · Versez le sirop d'érable dans une neige compactée",
-                            NbProduitRestant = 80,
+                            NbProduitRestant = 67,
                             Nom = "Tire d'érable",
                             Prix = 1.6699999999999999,
                             image = "https://www.noovomoi.ca/cuisiner/trucs-et-inspirations/article.etapes-tire-erable-maison.1.618708.html"
@@ -276,7 +276,7 @@ namespace Projet4_prog.Migrations
                         {
                             Id = 4,
                             Description = "Des pitas mais sucrée",
-                            NbProduitRestant = 8,
+                            NbProduitRestant = 67,
                             Nom = "3 Crèpes",
                             Prix = 8.6699999999999999,
                             image = "https://www.noovomoi.ca/cuisiner/trucs-et-inspirations/article.etapes-tire-erable-maison.1.618708.html"

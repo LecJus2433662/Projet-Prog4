@@ -95,7 +95,16 @@ namespace Projet4_prog
                     }
                 });
             });
-
+            // CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowNextJs", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
@@ -147,6 +156,7 @@ namespace Projet4_prog
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowNextJs"); 
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
