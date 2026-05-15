@@ -147,6 +147,16 @@ namespace Projet4_prog
                     await userManager.CreateAsync(admin, "Admin123!");
                     await userManager.AddToRoleAsync(admin, "Admin");
                 }
+                if (await userManager.FindByNameAsync("user") == null)
+                {
+                    var user = new UtilisateurApplication
+                    {
+                        UserName = "user",
+                        Email = "user@boutique.com"
+                    };
+                    await userManager.CreateAsync(user, "User123!");
+                    await userManager.AddToRoleAsync(user, "User");
+                }
             }
 
             if (app.Environment.IsDevelopment())

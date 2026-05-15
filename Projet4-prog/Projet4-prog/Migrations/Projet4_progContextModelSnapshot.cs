@@ -222,6 +222,10 @@ namespace Projet4_prog.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("NbProduitRestant")
                         .HasColumnType("int");
 
@@ -233,10 +237,6 @@ namespace Projet4_prog.Migrations
                         .IsRequired()
                         .HasColumnType("float");
 
-                    b.Property<string>("image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Produits");
@@ -246,37 +246,37 @@ namespace Projet4_prog.Migrations
                         {
                             Id = 1,
                             Description = "bacon infusé au sirop d'érable cuisiner avec l'amour pour Jad",
+                            Image = "https://images.unsplash.com/photo-1742859052497-f8bbc8366a32?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmFjb258ZW58MHx8MHx8fDA%3D",
                             NbProduitRestant = 67,
                             Nom = "Bacon halal au sirop d'érable",
-                            Prix = 12.67,
-                            image = "https://www.instagram.com/reel/DPHjzjGEixS/"
+                            Prix = 12.67
                         },
                         new
                         {
                             Id = 2,
                             Description = "c'est tellement bon pour mathis",
+                            Image = "https://images.ricardocuisine.com/services/recipes/992x1340_8894.jpg",
                             NbProduitRestant = 67,
                             Nom = "Pudding chomeur",
-                            Prix = 16.670000000000002,
-                            image = "https://www.allrecipes.com/recipe/267358/pouding-chomeur/"
+                            Prix = 16.670000000000002
                         },
                         new
                         {
                             Id = 3,
                             Description = "Le sirop d'érable chauffé est versé dans la neige pour créer la tire. · Versez le sirop d'érable dans une neige compactée",
+                            Image = "https://images.radio-canada.ca/q_auto,w_844/v1/alimentation/recette/16x9/2892-tire-erable.jpg",
                             NbProduitRestant = 67,
                             Nom = "Tire d'érable",
-                            Prix = 1.6699999999999999,
-                            image = "https://www.noovomoi.ca/cuisiner/trucs-et-inspirations/article.etapes-tire-erable-maison.1.618708.html"
+                            Prix = 1.6699999999999999
                         },
                         new
                         {
                             Id = 4,
                             Description = "Des pitas mais sucrée",
+                            Image = "https://img.fourchette-et-bikini.fr/1200x900/2025/03/07/i50846-crepes-sucrees-sans-gluten-et-faciles.webp",
                             NbProduitRestant = 67,
                             Nom = "3 Crèpes",
-                            Prix = 8.6699999999999999,
-                            image = "https://www.noovomoi.ca/cuisiner/trucs-et-inspirations/article.etapes-tire-erable-maison.1.618708.html"
+                            Prix = 8.6699999999999999
                         });
                 });
 
