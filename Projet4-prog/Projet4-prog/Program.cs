@@ -7,6 +7,7 @@ using Projet4_prog.Data;
 using Projet4_prog.Models;
 using Projet4_prog.Services;
 using Serilog;
+using Stripe;
 using System.Text;
 
 namespace Projet4_prog
@@ -60,12 +61,18 @@ namespace Projet4_prog
                 };
             });
 
+            builder.Services.Configure<StripeSettings>(
+            builder.Configuration.GetSection("Stripe"));
+
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+            builder.Services.AddScoped<IStripeService, StripeService>();
             // AutoMapper
             builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfile>());
 
             // Services
             builder.Services.AddScoped<IProduitService, ProduitService>();
             builder.Services.AddScoped<ICommandeService, CommandeService>();
+            builder.Services.AddScoped<IStripeService,  StripeService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
 
             // Swagger avec support JWT
@@ -109,6 +116,8 @@ namespace Projet4_prog
             builder.Services.AddEndpointsApiExplorer();
 
             var app = builder.Build();
+
+           
 
             // Seed des rôles et de l'admin
             app.UseStatusCodePages(async context =>
@@ -166,7 +175,7 @@ namespace Projet4_prog
             }
 
             app.UseHttpsRedirection();
-            app.UseCors("AllowNextJs"); 
+            app.UseCors("AllowNextJs");
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

@@ -104,5 +104,14 @@ namespace Projet4_prog.Services
             _logger.LogInformation("Commande {Id} supprimée.", id);
             return true;
         }
+
+        public async Task MettreAJourStatutAsync(int commandeId, StatutCommande statut)
+        {
+            var commande = await _context.Commandes.FindAsync(commandeId)
+                ?? throw new KeyNotFoundException($"Commande {commandeId} introuvable.");
+
+            commande.Statut = statut;
+            await _context.SaveChangesAsync();
+        }
     }
 }

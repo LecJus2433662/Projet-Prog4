@@ -8,5 +8,6 @@ namespace Projet4_prog.DTO.Commande
         [Required]
         [MinLength(1, ErrorMessage = "La commande doit contenir au moins un item.")]
         public List<ItemCommandeCreationDto> ItemsCommande { get; set; } = new();
+        public List<ItemCommandeCreationDto> Items { get; internal set; }
     }
 }

@@ -72,5 +72,18 @@ namespace Projet4_prog.Services
             _logger.LogInformation("Produit {Id} supprimé.", id);
             return true;
         }
+
+        public async Task DiminuerStockAsync(int produitId, int quantite)
+        {
+            var produit = await _context.Produits.FindAsync(produitId)
+                ?? throw new KeyNotFoundException($"Produit {produitId} introuvable.");
+
+            if (produit.NbProduitRestant < quantite)
+                throw new InvalidOperationException(
+                    $"Stock insuffisant pour le produit {produit.Nom}.");
+
+            produit.NbProduitRestant -= quantite;
+            await _context.SaveChangesAsync();
+        }
     }
 }

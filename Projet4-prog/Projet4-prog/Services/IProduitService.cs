@@ -9,5 +9,6 @@ namespace Projet4_prog.Services
         Task<ProduitLectureDto> CreerAsync(ProduitEcritureDto dto);
         Task<ProduitLectureDto?> ModifierAsync(int id, ProduitEcritureDto dto);
         Task<bool> SupprimerAsync(int id);
+        Task DiminuerStockAsync(int produitId, int quantite);
     }
 }

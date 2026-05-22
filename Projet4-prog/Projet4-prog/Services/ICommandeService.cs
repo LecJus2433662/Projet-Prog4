@@ -1,4 +1,5 @@
 ﻿using Projet4_prog.DTO.Commande;
+using Projet4_prog.Models;
 
 namespace Projet4_prog.Services
 {
@@ -9,5 +10,6 @@ namespace Projet4_prog.Services
         Task<CommandeLectureDto?> ObtenirParIdAsync(int id, string utilisateurId);
         Task<CommandeLectureDto> CreerAsync(CommandeCreationDto dto, string utilisateurId);
         Task<bool> SupprimerAsync(int id, string utilisateurId);
+        Task MettreAJourStatutAsync(int commandeId, StatutCommande statut);
     }
 }

@@ -18,7 +18,7 @@ namespace Projet4_prog.Models
         [Required]
         public int NbProduitRestant { get; set; }
 
-        public string Image { get; set; } = string.Empty;
+        public string image { get; set; } = string.Empty;
 
         public ICollection<ItemCommande> ItemsCommande { get; set; } = new List<ItemCommande>();
     }
